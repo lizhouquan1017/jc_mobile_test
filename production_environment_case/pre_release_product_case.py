@@ -287,17 +287,17 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
 
-    # 正常注册
-    def test_024_user_register(self):
-        """正常注册"""
-        logging.info('=用户正常注册成功=')
-        register = RegisterView(self.driver)
-        data = register.get_csv_data('../data/product_data/register.csv', 1)
-        register.register_action(data[0], data[2], data[3])
-        newdata = str(int(data[0])+1)
-        self.assertTrue(register.check_register_success_status())
-        sleep(2)
-        register.update_csv_data('../data/product_data/register.csv', 1, '用户正常注册', data[0], newdata)
+    # # 正常注册
+    # def test_024_user_register(self):
+    #     """正常注册"""
+    #     logging.info('=用户正常注册成功=')
+    #     register = RegisterView(self.driver)
+    #     data = register.get_csv_data('../data/product_data/register.csv', 1)
+    #     register.register_action(data[0], data[2], data[3])
+    #     newdata = str(int(data[0])+1)
+    #     self.assertTrue(register.check_register_success_status())
+    #     sleep(2)
+    #     register.update_csv_data('../data/product_data/register.csv', 1, '用户正常注册', data[0], newdata)
 
     # 注册手机号为空
     def test_025_register_phonenumEmpty(self):
