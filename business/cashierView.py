@@ -3,6 +3,7 @@ import logging
 import time
 from base.BaseOperation import BaseOperation
 from base.BaseReadIni import ReadIni
+from time import sleep
 
 
 class CashierView(BaseOperation):
@@ -64,8 +65,10 @@ class CashierView(BaseOperation):
         if normal:
             logging.info('点击改价按钮')
             self.click(self.efg.read_config('改价按钮'))
+            sleep(2)
             logging.info('点击改价')
             self.click(self.efg.read_config('改价按钮'))
+            sleep(2)
             if good_modify:
                 logging.info('点击改价tab')
                 self.click_text('改价')
