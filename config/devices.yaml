@@ -1,0 +1,13 @@
+# p20真机
+platformName: Android
+platformVersion: 9
+deviceName: CLB7N18403015180
+appname: jxc_test.apk
+noReset: False
+unicodeKeyboard: True
+resetKeyboard: True
+appPackage: com.gengcon.android.jxc
+appActivity: com.gengcon.android.jxc.login.SplashActivity
+automationName: uiautomator2
+ip: 127.0.0.1
+port: 4723
