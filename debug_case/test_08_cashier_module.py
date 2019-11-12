@@ -13,7 +13,7 @@ class CashierTest(BaseDriverOne, TestCase_):
     # 登录操作
     def login_action(self):
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 1)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 1)
         login.login_action(data[0], data[2])
 
     # 正常收银

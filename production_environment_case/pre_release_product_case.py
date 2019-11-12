@@ -25,7 +25,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
     # 登录操作
     def login_action(self):
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 1)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 1)
         login.login_action(data[0], data[2])
         sleep(2)
 
@@ -182,7 +182,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """正常登录用例"""
         logging.info('==正常账号成功登录用例==')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 1)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 1)
         login.login_action(data[0], data[2])
         sleep(2)
         self.assertTrue(login.check_login_success_status())
@@ -191,7 +191,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """密码错误登录用例"""
         logging.info('==正确账号密码错误登录=')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 2)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 2)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -201,7 +201,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """密码为空登录"""
         logging.info('==正常账号密码为空登录==')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 3)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 3)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -210,7 +210,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """手机号为错误登录"""
         logging.info('==手机号格式错误登录==')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 4)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 4)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -219,7 +219,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """未注册账号登录"""
         logging.info('==未注册账号登录==')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 5)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 5)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -228,7 +228,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """ 手机号为空登录"""
         logging.info('==手机号为空登录==')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 6)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 6)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -237,7 +237,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """限制账号登录"""
         logging.info('==限制账号登录==')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 7)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 7)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -246,7 +246,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """停用账号登录"""
         logging.info('==停用账号登录==')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 8)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 8)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -255,7 +255,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
     #     """验证码登录"""
     #     logging.info('==验证码登录==')
     #     login = LoginView(self.driver)
-    #     data = login.get_csv_data('../data/product_data/loginView.csv', 9)
+    #     data = login.get_csv_data('../data/product_data/login_data.csv', 9)
     #     login.login_code_action(data[0], data[1])
     #     sleep(2)
     #     self.assertTrue(login.check_login_success_status())
@@ -272,7 +272,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """验证码为空登录"""
         logging.info('==验证码为空登录==')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 10)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 10)
         login.login_code_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -281,7 +281,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """验证码错误登录"""
         logging.info('==验证码错误登录==')
         login = LoginView(self.driver)
-        data = login.get_csv_data('../data/product_data/loginView.csv', 11)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 11)
         login.login_code_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -333,14 +333,14 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
     #     """修改密码成功"""
     #     logging.info(r'==修改密码成功用例==')
     #     find = FindPwdView(self.driver)
-    #     data0 = find.get_csv_data('../data/product_data/loginView.csv', 1)
+    #     data0 = find.get_csv_data('../data/product_data/login_data.csv', 1)
     #     data1 = find.get_csv_data('../data/product_data/pwd.csv', 10)
     #     data2 = find.get_csv_data('../data/product_data/pwd.csv', 11)
     #     find.findpwd_action(data0[0], data1[2])
     #     find.modify_action(data1[3], data1[3])
     #     sleep(2)
     #     self.assertTrue(find.check_find_pwd_success_status())
-    #     find.update_csv_data('../data/product_data/loginView.csv', 1, '正式账号', data0[2], data1[3])
+    #     find.update_csv_data('../data/product_data/login_data.csv', 1, '正式账号', data0[2], data1[3])
     #     find.update_csv_data('../data/product_data/pwd.csv', 1, '密码相同', data2[3], data1[3])
     #     logging.info(pwd)
     #     find.update_csv_data('../data/product_data/pwd.csv', 1, '修改密码', data1[3], pwd)

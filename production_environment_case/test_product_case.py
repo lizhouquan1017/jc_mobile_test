@@ -28,7 +28,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
     # 登录操作
     def login_action(self):
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 1)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 1)
         login.login_action(data[0], data[2])
         sleep(2)
 
@@ -185,7 +185,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """正常登录用例"""
         logging.info('==正常账号成功登录用例==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 1)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 1)
         login.login_action(data[0], data[2])
         sleep(2)
         self.assertTrue(login.check_login_success_status())
@@ -194,7 +194,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """密码错误登录用例"""
         logging.info('==正确账号密码错误登录=')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 2)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 2)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -204,7 +204,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """密码为空登录"""
         logging.info('==正常账号密码为空登录==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 3)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 3)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -213,7 +213,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """手机号为错误登录"""
         logging.info('==手机号格式错误登录==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 4)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 4)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -222,7 +222,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """未注册账号登录"""
         logging.info('==未注册账号登录==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 5)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 5)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -231,7 +231,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """ 手机号为空登录"""
         logging.info('==手机号为空登录==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 6)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 6)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -240,7 +240,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """限制账号登录"""
         logging.info('==限制账号登录==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 7)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 7)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -249,7 +249,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """停用账号登录"""
         logging.info('==停用账号登录==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 8)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 8)
         login.login_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -258,7 +258,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """验证码登录"""
         logging.info('==验证码登录==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 9)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 9)
         login.login_code_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_success_status())
@@ -275,7 +275,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """验证码为空登录"""
         logging.info('==验证码为空登录==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 10)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 10)
         login.login_code_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -284,7 +284,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """验证码错误登录"""
         logging.info('==验证码错误登录==')
         login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/LoginBusiness.csv', 11)
+        data = login.get_csv_data('../data/product_data/login_data.csv', 11)
         login.login_code_action(data[0], data[1])
         sleep(2)
         self.assertTrue(login.check_login_fail_status())
@@ -336,14 +336,14 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """修改密码成功"""
         logging.info(r'==修改密码成功用例==')
         find = FindPwdBusiness(self.driver)
-        data0 = find.get_csv_data('../data/product_data/LoginBusiness.csv', 1)
+        data0 = find.get_csv_data('../data/product_data/login_data.csv', 1)
         data1 = find.get_csv_data('../data/product_data/pwd.csv', 10)
         data2 = find.get_csv_data('../data/product_data/pwd.csv', 11)
         find.findpwd_action(data0[0], data1[2])
         find.modify_action(data1[3], data1[3])
         sleep(2)
         self.assertTrue(find.check_find_pwd_success_status())
-        find.update_csv_data('../data/product_data/LoginBusiness.csv', 1, '正式账号', data0[2], data1[3])
+        find.update_csv_data('../data/product_data/login_data.csv', 1, '正式账号', data0[2], data1[3])
         find.update_csv_data('../data/product_data/pwd.csv', 1, '密码相同', data2[3], data1[3])
         logging.info(pwd)
         find.update_csv_data('../data/product_data/pwd.csv', 1, '修改密码', data1[3], pwd)
@@ -962,7 +962,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         cashier.cashier_goods(num=30)
         sleep(1)
         sales_order_num = cashier.get_sales_order_num()
-        ReadData().write_data('sale_order', 'num1', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num1', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
 
     # 商品打折销售
@@ -972,7 +972,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         cashier = CashBusiness(self.driver)
         cashier.cashier_goods(num=1, normal=True, good_discount=True, good_value=1)
         sales_order_num = cashier.get_sales_order_num()
-        ReadData().write_data('sale_order', 'num2', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num2', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
         # self.assertEqual(cashier.get_order_price(), r'￥20.00')
 
@@ -983,7 +983,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         cashier = CashBusiness(self.driver)
         cashier.cashier_goods(num=1, normal=True, good_modify=True, good_value=20)
         sales_order_num = cashier.get_sales_order_num()
-        ReadData().write_data('sale_order', 'num3', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num3', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
         # self.assertEqual(cashier.get_order_price(), r'￥20.00')
 
@@ -995,9 +995,8 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         cashier.cashier_goods(num=1, normal=True, good_discount=True, good_value=5, offer=False,
                               order_discount=True, order_value=5)
         sales_order_num = cashier.get_sales_order_num()
-        ReadData().write_data('sale_order', 'num4', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num4', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
-        # self.assertEqual(cashier.get_order_price(), r'￥50.00')
 
     # 商品改价，订单打折销售
     def test_089_modify_discount_sales_case(self):
@@ -1007,7 +1006,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         cashier.cashier_goods(num=1, normal=True, good_modify=True, good_value=100, offer=False,
                               order_discount=True, order_value=8)
         sales_order_num = cashier.get_sales_order_num()
-        ReadData().write_data('sale_order', 'num5', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num5', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
 
     # 商品打折，订单改价销售
@@ -1018,7 +1017,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         cashier.cashier_goods(num=1, normal=True, good_discount=True, good_value=5, offer=False,
                               order_modify=True, order_value=88)
         sales_order_num = cashier.get_sales_order_num()
-        ReadData().write_data('sale_order', 'num6', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num6', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
 
     # 商品改价，订单改价销售
@@ -1029,7 +1028,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         cashier.cashier_goods(num=1, normal=True, good_modify=True, good_value=100, offer=False,
                               order_modify=True, order_value=88)
         sales_order_num = cashier.get_sales_order_num()
-        ReadData().write_data('sale_order', 'num7', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num7', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
 
     # 订单打折销售
@@ -1039,7 +1038,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         cashier = CashBusiness(self.driver)
         cashier.cashier_goods(num=1, offer=False, order_discount=True, order_value=5)
         sales_order_num = cashier.get_sales_order_num()
-        ReadData().write_data('sale_order', 'num8', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num8', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
 
     # 商品改价，订单改价销售
@@ -1049,7 +1048,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         cashier = CashBusiness(self.driver)
         cashier.cashier_goods(num=1, offer=False, order_modify=True, order_value=88)
         sales_order_num = cashier.get_sales_order_num()
-        ReadData().write_data('sale_order', 'num9', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num9', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
 
     # 销售单复制在销售
@@ -1060,7 +1059,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         ordernum = ReadData().get_data('product_sale_order', 'num8')
         salesorder.sales_order_action(keyword=ordernum, copy=True)
         sales_order_num = salesorder.get_sales_order_num()
-        ReadData().write_data('product_sale_order', 'num17', sales_order_num)
+        ReadData().write_data('product_sale_order', 'num9', sales_order_num)
         # 设置检查点
         self.assertTrue(salesorder.check_transaction_success_status())
 
@@ -1069,7 +1068,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         """销售单作废"""
         self.login_action()
         salesorder = SalesOrderBusiness(self.driver)
-        ordernum = ReadData().get_data('product_sale_order', 'num17')
+        ordernum = ReadData().get_data('product_sale_order', 'num9')
         salesorder.sales_order_action(keyword=ordernum, obsolete=True)
         # 设置检查点
         self.assertTrue(salesorder.check_sales_order_status())
@@ -1108,7 +1107,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertEqual(salesreturn.check_account_type(), '银行卡')
 
     # 原始销售单退货
-    def test_04_original_sales_return_case(self):
+    def test_099_original_sales_return_case(self):
         """原单退货（支付宝账户）"""
         self.login_action()
         salesreturn = SalesReturnBusiness(self.driver)
@@ -1119,7 +1118,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertEqual(salesreturn.check_account_type(), '支付宝账户')
 
     # 原始销售单退货
-    def test_099_original_sales_return_case(self):
+    def test_100_original_sales_return_case(self):
         """原单退货（微信支付账户）"""
         self.login_action()
         salesreturn = SalesReturnBusiness(self.driver)
@@ -1130,7 +1129,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertEqual(salesreturn.check_account_type(), '微信支付账户')
 
     # 原始销售单退货
-    def test_100_original_sales_return_case(self):
+    def test_101_original_sales_return_case(self):
         """原单退货（其他账户）"""
         self.login_action()
         salesreturn = SalesReturnBusiness(self.driver)
@@ -1141,7 +1140,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertEqual(salesreturn.check_account_type(), '其他账户')
 
     # 原始销售单退货
-    def test_101_original_sales_return_case(self):
+    def test_102_original_sales_return_case(self):
         """原单退货（继续退货）"""
         self.login_action()
         salesreturn = SalesReturnBusiness(self.driver)
@@ -1153,7 +1152,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertTrue(salesreturn.check_sales_return_success_status())
 
     # 原始销售单退货
-    def test_102_original_sales_return_case(self):
+    def test_103_original_sales_return_case(self):
         """原单退货（改价）"""
         self.login_action()
         salesreturn = SalesReturnBusiness(self.driver)
@@ -1165,7 +1164,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertEqual(total_money, '￥1000.00')
 
     # 原始销售单退货
-    def test_103_original_sales_return_case(self):
+    def test_104_original_sales_return_case(self):
         """原单退货（备注）"""
         self.login_action()
         salesreturn = SalesReturnBusiness(self.driver)
@@ -1177,7 +1176,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertEqual(info, '退货商品')
 
     # 直接退货
-    def test_104_direct_sales_return_case(self):
+    def test_105_direct_sales_return_case(self):
         """直接退货（正常）"""
         self.login_action()
         salesreutrn = SalesReturnBusiness(self.driver)
@@ -1187,7 +1186,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertTrue(salesreutrn.check_sales_return_success_status())
 
     # 直接退货
-    def test_105_direct_sales_return_case(self):
+    def test_106_direct_sales_return_case(self):
         """直接退货（现金）"""
         self.login_action()
         salesreutrn = SalesReturnBusiness(self.driver)
@@ -1197,7 +1196,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertTrue(salesreutrn.check_sales_return_success_status())
 
     # 直接退货
-    def test_106_direct_sales_return_case(self):
+    def test_107_direct_sales_return_case(self):
         """直接退货（银行卡）"""
         self.login_action()
         salesreutrn = SalesReturnBusiness(self.driver)
@@ -1207,7 +1206,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertTrue(salesreutrn.check_sales_return_success_status())
 
     # 直接退货
-    def test_107_direct_sales_return_case(self):
+    def test_108_direct_sales_return_case(self):
         """直接退货（支付宝账户）"""
         self.login_action()
         salesreutrn = SalesReturnBusiness(self.driver)
@@ -1217,7 +1216,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertTrue(salesreutrn.check_sales_return_success_status())
 
     # 直接退货
-    def test_108_direct_sales_return_case(self):
+    def test_109_direct_sales_return_case(self):
         """直接退货（微信支付账户）"""
         self.login_action()
         salesreutrn = SalesReturnBusiness(self.driver)
@@ -1227,7 +1226,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertTrue(salesreutrn.check_sales_return_success_status())
 
     # 直接退货
-    def test_109_direct_sales_return_case(self):
+    def test_110_direct_sales_return_case(self):
         """直接退货（其他账户）"""
         self.login_action()
         salesreutrn = SalesReturnBusiness(self.driver)
@@ -1237,7 +1236,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertTrue(salesreutrn.check_sales_return_success_status())
 
     # 直接退货
-    def test_110_direct_sales_return_case(self):
+    def test_111_direct_sales_return_case(self):
         """直接退货（继续退货）"""
         self.login_action()
         salesreutrn = SalesReturnBusiness(self.driver)
@@ -1247,7 +1246,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertTrue(salesreutrn.check_sales_return_success_status())
 
     # 直接退货
-    def test_111_direct_sales_return_case(self):
+    def test_112_direct_sales_return_case(self):
         """直接退货（改价）"""
         self.login_action()
         salesreutrn = SalesReturnBusiness(self.driver)
@@ -1258,7 +1257,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         self.assertEqual(total_money, '￥1000.00')
 
     # 直接退货
-    def test_112_direct_sales_return_case(self):
+    def test_113_direct_sales_return_case(self):
         """直接退货（备注）"""
         self.login_action()
         salesreutrn = SalesReturnBusiness(self.driver)
