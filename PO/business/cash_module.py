@@ -6,11 +6,11 @@ from base.BaseReadIni import ReadIni
 from time import sleep
 
 
-class CashierView(BaseOperation):
+class CashBusiness(BaseOperation):
 
     def __init__(self, driver):
-        super(CashierView, self).__init__(driver)
-        self.efg = ReadIni(file_name='cashierView.ini')
+        super(CashBusiness, self).__init__(driver)
+        self.efg = ReadIni(file_name='cash_page.ini')
 
     def cashier_goods(self, num=None, flag=False, normal=False, good_value=None, good_discount=False, good_modify=False,
                       offer=True, order_discount=False, order_modify=False, order_value=None):
@@ -21,6 +21,7 @@ class CashierView(BaseOperation):
         self.order_modify_discount(offer=offer, order_discount=order_discount, order_modify=order_modify,
                                    order_value=order_value)
 
+    # 下面为业务操作流
     # 进入收银界面
     def enter_cash(self):
         logging.info(r'进入收银界面')
@@ -60,7 +61,7 @@ class CashierView(BaseOperation):
         self.click(self.efg.read_config('结账'))
         self.pay_bill_action()
 
-    # 商品打折改价
+    # 商品打折改价action
     def goods_modify_discount(self, normal=False, good_value=None, good_discount=False, good_modify=False):
         if normal:
             logging.info('点击改价按钮')
@@ -84,7 +85,7 @@ class CashierView(BaseOperation):
         else:
             pass
 
-    # 订单打折改价
+    # 订单打折改价action
     def order_modify_discount(self, offer=True, order_discount=False, order_modify=False, order_value=None):
         if offer:
             logging.info(r'去结账')
@@ -116,7 +117,7 @@ class CashierView(BaseOperation):
                 self.type(self.efg.read_config('改价输入框'), order_value)
                 self.pay_bill_action()
 
-    # 挂单成功后销售成功
+    # 挂单成功后销售成功action
     def hangup_order_cashier_action(self, num):
         self.choose_goods_action(num)
         logging.info(r'点击挂单按钮')
@@ -127,6 +128,7 @@ class CashierView(BaseOperation):
         self.click_text(self.efg.read_config('商品名称'))
         self.pay_bill_action()
 
+    # 检查点设置
     # 检查交易成功状态
     def check_transaction_success_status(self):
         logging.info(r'检查交易成功状态')

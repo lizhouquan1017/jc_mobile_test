@@ -5,11 +5,11 @@ from base.BaseReadIni import ReadIni
 from time import sleep
 
 
-class PurchaseReturnOrderView(BaseOperation):
+class PurchaseReturnOrderBusiness(BaseOperation):
 
     def __init__(self, driver):
-        super(PurchaseReturnOrderView, self).__init__(driver)
-        self.efg = ReadIni(file_name='purchasereturnorderView.ini')
+        super(PurchaseReturnOrderBusiness, self).__init__(driver)
+        self.efg = ReadIni(file_name='purchasereturnorder_page.ini')
 
     # 进入采购单界面
     def enter_puchas_return_eorder_interface(self):

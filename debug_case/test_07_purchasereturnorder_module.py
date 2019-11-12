@@ -1,6 +1,6 @@
 # coding:utf-8
-from business.purchasereturnorderView import PurchaseReturnOrderView
-from business.loginView import LoginView
+from PO.business import PurchaseReturnOrderView
+from PO.business.login_module import LoginView
 from base.BaseDriver_one import BaseDriverOne
 from base.TestCaase import TestCase_
 from base.BaseReadCfg import ReadData

@@ -7,11 +7,11 @@ from base.BaseReadIni import ReadIni
 from time import sleep
 
 
-class RegisterView(BaseOperation):
+class RegisterBusiness(BaseOperation):
 
     def __init__(self, driver):
-        super(RegisterView, self).__init__(driver)
-        self.efg = ReadIni(file_name='registerView.ini')
+        super(RegisterBusiness, self).__init__(driver)
+        self.efg = ReadIni(file_name='register_page.ini')
 
     # 随机数
     number = random.randint(0, 9999999)

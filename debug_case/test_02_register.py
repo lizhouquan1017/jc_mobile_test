@@ -1,5 +1,5 @@
 # coding:utf-8
-from business.registerView import RegisterView
+from PO.business.register_module import RegisterView
 from base.BaseDriver_one import BaseDriverTwo
 from base.TestCaase import TestCase_
 import logging

@@ -1,6 +1,6 @@
 # coding:utf-8
-from business.cashierView import CashierView
-from business.loginView import LoginView
+from PO.business.cash_module import CashierView
+from PO.business.login_module import LoginView
 from base.BaseDriver_one import BaseDriverOne
 from base.TestCaase import TestCase_
 from base.BaseReadCfg import ReadData

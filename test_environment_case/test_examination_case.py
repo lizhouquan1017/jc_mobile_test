@@ -3,9 +3,9 @@ __author__ = "lizhouquan"
 
 from base.BaseDriver_one import BaseDriverTwo
 from base.TestCaase import TestCase_
-from business.loginView import LoginView
-from business.registerView import RegisterView
-from business.findPwdView import FindPwdView
+from PO.business.login_module import LoginView
+from PO.business.register_module import RegisterView
+from PO.business import FindPwdView
 from time import sleep
 import logging
 import random

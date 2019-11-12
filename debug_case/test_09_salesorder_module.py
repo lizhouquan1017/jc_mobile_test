@@ -1,10 +1,9 @@
 # coding:utf-8
-from business.loginView import LoginView
-from business.salesorderView import SalesOrderView
+from PO.business.login_module import LoginView
+from PO.business import SalesOrderView
 from base.BaseReadCfg import ReadData
 from base.BaseDriver_one import BaseDriverOne
 from base.TestCaase import TestCase_
-import time
 
 
 class SalesReturnTest(BaseDriverOne, TestCase_):

@@ -1,5 +1,5 @@
 # coding = utf-8
-from business.findPwdView import FindPwdView
+from PO.business import FindPwdView
 from base.BaseDriver_one import BaseDriverTwo
 from base.TestCaase import TestCase_
 import logging

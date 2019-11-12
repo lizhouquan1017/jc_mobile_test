@@ -5,11 +5,11 @@ from base.BaseReadIni import ReadIni
 from time import sleep
 
 
-class LoginView(BaseOperation):
+class LoginBusiness(BaseOperation):
 
     def __init__(self, driver):
-        super(LoginView, self).__init__(driver)
-        self.efg = ReadIni(file_name='loginView.ini')
+        super(LoginBusiness, self).__init__(driver)
+        self.efg = ReadIni(file_name='login_page.ini')
 
     # 登录成功
     def login_action(self, username, password):

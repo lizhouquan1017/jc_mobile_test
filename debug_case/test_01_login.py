@@ -3,7 +3,7 @@ __author__ = "lizhouquan"
 
 from base.BaseDriver_one import BaseDriverOne
 from base.TestCaase import TestCase_
-from business.loginView import LoginView
+from PO.business.login_module import LoginView
 import logging
 
 

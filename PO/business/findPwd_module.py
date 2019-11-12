@@ -5,11 +5,11 @@ from base.BaseReadIni import ReadIni
 from time import sleep
 
 
-class FindPwdView(BaseOperation):
+class FindPwdBusiness(BaseOperation):
 
     def __init__(self, driver):
-        super(FindPwdView, self).__init__(driver)
-        self.efg = ReadIni(file_name='findpwdView.ini')
+        super(FindPwdBusiness, self).__init__(driver)
+        self.efg = ReadIni(file_name='findpwd_page.ini')
 
     # 找回密码界面公共方法
     def findpwd_action(self, phonenum, code):

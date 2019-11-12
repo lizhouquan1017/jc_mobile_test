@@ -5,11 +5,11 @@ from base.BaseOperation import BaseOperation
 from base.BaseReadIni import ReadIni
 
 
-class SalesOrderView(BaseOperation):
+class SalesOrderBusiness(BaseOperation):
 
     def __init__(self, driver):
-        super(SalesOrderView, self).__init__(driver)
-        self.efg = ReadIni(file_name='salesorderView.ini')
+        super(SalesOrderBusiness, self).__init__(driver)
+        self.efg = ReadIni(file_name='salesorder_page.ini')
 
     # 进入销售单界面
     def enter_sales_order_action(self):

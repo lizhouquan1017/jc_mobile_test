@@ -3,15 +3,14 @@ __author__ = "lizhouquan"
 
 from base.BaseDriver_one import BaseDriverOne
 from base.TestCaase import TestCase_
-from business.loginView import LoginView
-from business.registerView import RegisterView
-from business.findPwdView import FindPwdView
-from business.purchaseView import PurchaseView
-from business.purchaseorderView import PurchaseOrderView
-from business.purchasereturnView import PurchaseReturnView
-from business.purchasereturnorderView import PurchaseReturnOrderView
-from business.goodsView import GoodsViews
-from business.cashierView import CashierView
+from PO.business.login_module import LoginView
+from PO.business.register_module import RegisterView
+from PO.business import PurchaseView
+from PO.business import PurchaseOrderView
+from PO.business.purchasereturn_module import PurchaseReturnView
+from PO.business import PurchaseReturnOrderView
+from PO.business.goods_module import GoodsViews
+from PO.business.cash_module import CashierView
 from base.BaseReadCfg import ReadData
 from time import sleep
 import logging

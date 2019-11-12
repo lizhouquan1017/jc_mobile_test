@@ -1,7 +1,7 @@
 # coding:utf-8
 
-from business.goodsView import GoodsViews
-from business.loginView import LoginView
+from PO.business.goods_module import GoodsViews
+from PO.business.login_module import LoginView
 from base.TestCaase import TestCase_
 from base.BaseReadCfg import ReadData
 from base.BaseDriver_one import BaseDriverOne

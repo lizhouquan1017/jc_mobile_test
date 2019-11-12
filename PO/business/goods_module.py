@@ -6,11 +6,11 @@ from base.BaseReadIni import ReadIni
 from time import sleep
 
 
-class GoodsViews(BaseOperation):
+class GoodsBusiness(BaseOperation):
 
     def __init__(self, driver):
-        super(GoodsViews, self).__init__(driver)
-        self.efg = ReadIni(file_name='goodsView.ini')
+        super(GoodsBusiness, self).__init__(driver)
+        self.efg = ReadIni(file_name='goods_page.ini')
 
     # 进入商品管理界面
     def enter_goods_list(self):
