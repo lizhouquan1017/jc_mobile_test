@@ -12,6 +12,8 @@ from business.purchasereturnView import PurchaseReturnView
 from business.purchasereturnorderView import PurchaseReturnOrderView
 from business.goodsView import GoodsViews
 from business.cashierView import CashierView
+from business.salesorderView import SalesOrderView
+from business.salesreturnView import SalesReturnView
 from base.BaseReadCfg import ReadData
 from time import sleep
 import logging
@@ -957,7 +959,7 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         # 销售之前商品库存数
         logging.info('开始收银')
         cashier = CashierView(self.driver)
-        cashier.cashier_goods(num=1)
+        cashier.cashier_goods(num=30)
         sleep(1)
         sales_order_num = cashier.get_sales_order_num()
         ReadData().write_data('sale_order', 'num1', sales_order_num)
@@ -1049,3 +1051,219 @@ class ProdcutEnviromentTest(BaseDriverOne, TestCase_):
         sales_order_num = cashier.get_sales_order_num()
         ReadData().write_data('sale_order', 'num9', sales_order_num)
         self.assertTrue(cashier.check_transaction_success_status())
+
+    # 销售单复制在销售
+    def test_094_sales_order_copy_case(self):
+        """销售单复制并生成新的销售单"""
+        self.login_action()
+        salesorder = SalesOrderView(self.driver)
+        ordernum = ReadData().get_data('product_sale_order', 'num8')
+        salesorder.sales_order_action(keyword=ordernum, copy=True)
+        sales_order_num = salesorder.get_sales_order_num()
+        ReadData().write_data('product_sale_order', 'num17', sales_order_num)
+        # 设置检查点
+        self.assertTrue(salesorder.check_transaction_success_status())
+
+    # 销售单作废
+    def test_095_sales_order_copy_case(self):
+        """销售单作废"""
+        self.login_action()
+        salesorder = SalesOrderView(self.driver)
+        ordernum = ReadData().get_data('product_sale_order', 'num17')
+        salesorder.sales_order_action(keyword=ordernum, obsolete=True)
+        # 设置检查点
+        self.assertTrue(salesorder.check_sales_order_status())
+
+    # 原始销售单退货
+    def test_096_original_sales_return_case(self):
+        """原始销售单退货"""
+        self.login_action()
+        salesreturn = SalesReturnView(self.driver)
+        sales_order = ReadData().get_data('product_sale_order', 'num1')
+        salesreturn.original_order_return_action(good_name='测试商品8号', good_num=1, normal=True, keyword=sales_order)
+        sales_return_num = salesreturn.get_sales_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num1', sales_return_num)
+        self.assertTrue(salesreturn.check_sales_return_success_status())
+
+    # 原始销售单退货
+    def test_097_original_sales_return_case(self):
+        """原单退货（现金）"""
+        self.login_action()
+        salesreturn = SalesReturnView(self.driver)
+        sales_order = ReadData().get_data('product_sale_order', 'num1')
+        salesreturn.original_order_return_action(good_name='测试商品8号', good_num=1, keyword=sales_order, account='现金')
+        salesreturn_num = salesreturn.get_detail_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num2', salesreturn_num)
+        self.assertEqual(salesreturn.check_account_type(), '现金')
+
+    # 原始销售单退货
+    def test_098_original_sales_return_case(self):
+        """原单退货（银行卡）"""
+        self.login_action()
+        salesreturn = SalesReturnView(self.driver)
+        sales_order = ReadData().get_data('product_sale_order', 'num1')
+        salesreturn.original_order_return_action(good_name='测试商品8号', good_num=1, keyword=sales_order, account='银行卡')
+        salesreturn_num = salesreturn.get_detail_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num3', salesreturn_num)
+        self.assertEqual(salesreturn.check_account_type(), '银行卡')
+
+    # 原始销售单退货
+    def test_04_original_sales_return_case(self):
+        """原单退货（支付宝账户）"""
+        self.login_action()
+        salesreturn = SalesReturnView(self.driver)
+        sales_order = ReadData().get_data('product_sale_order', 'num1')
+        salesreturn.original_order_return_action(good_name='测试商品8号', good_num=1, keyword=sales_order, account='支付宝账户')
+        salesreturn_num = salesreturn.get_detail_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num4', salesreturn_num)
+        self.assertEqual(salesreturn.check_account_type(), '支付宝账户')
+
+    # 原始销售单退货
+    def test_099_original_sales_return_case(self):
+        """原单退货（微信支付账户）"""
+        self.login_action()
+        salesreturn = SalesReturnView(self.driver)
+        sales_order = ReadData().get_data('product_sale_order', 'num1')
+        salesreturn.original_order_return_action(good_name='测试商品8号', good_num=1, keyword=sales_order, account='微信支付账户')
+        salesreturn_num = salesreturn.get_detail_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num5', salesreturn_num)
+        self.assertEqual(salesreturn.check_account_type(), '微信支付账户')
+
+    # 原始销售单退货
+    def test_100_original_sales_return_case(self):
+        """原单退货（其他账户）"""
+        self.login_action()
+        salesreturn = SalesReturnView(self.driver)
+        sales_order = ReadData().get_data('product_sale_order', 'num1')
+        salesreturn.original_order_return_action(good_name='测试商品8号', good_num=1, keyword=sales_order, account='其他账户')
+        salesreturn_num = salesreturn.get_detail_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num6', salesreturn_num)
+        self.assertEqual(salesreturn.check_account_type(), '其他账户')
+
+    # 原始销售单退货
+    def test_101_original_sales_return_case(self):
+        """原单退货（继续退货）"""
+        self.login_action()
+        salesreturn = SalesReturnView(self.driver)
+        sales_order = ReadData().get_data('product_sale_order', 'num1')
+        salesreturn.original_order_return_action(good_name='测试商品8号', good_num=1, normal=True, keyword=sales_order,
+                                                 is_continue=True)
+        salesreturn_num = salesreturn.get_sales_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num7', salesreturn_num)
+        self.assertTrue(salesreturn.check_sales_return_success_status())
+
+    # 原始销售单退货
+    def test_102_original_sales_return_case(self):
+        """原单退货（改价）"""
+        self.login_action()
+        salesreturn = SalesReturnView(self.driver)
+        sales_order = ReadData().get_data('product_sale_order', 'num1')
+        salesreturn.original_order_return_action(good_name='测试商品8号', good_num=1, keyword=sales_order, modify=1000)
+        salesreturn_num = salesreturn.get_detail_return_ordernum()
+        total_money = salesreturn.check_total_money()
+        ReadData().write_data('product_sale_return_order', 'num8', salesreturn_num)
+        self.assertEqual(total_money, '￥1000.00')
+
+    # 原始销售单退货
+    def test_103_original_sales_return_case(self):
+        """原单退货（备注）"""
+        self.login_action()
+        salesreturn = SalesReturnView(self.driver)
+        sales_order = ReadData().get_data('product_sale_order', 'num1')
+        salesreturn.original_order_return_action(good_name='测试商品8号', good_num=1, keyword=sales_order, remark='退货商品')
+        salesreturn_num = salesreturn.get_detail_return_ordernum()
+        info = salesreturn.check_remaks()
+        ReadData().write_data('product_sale_return_order', 'num9', salesreturn_num)
+        self.assertEqual(info, '退货商品')
+
+    # 直接退货
+    def test_104_direct_sales_return_case(self):
+        """直接退货（正常）"""
+        self.login_action()
+        salesreutrn = SalesReturnView(self.driver)
+        salesreutrn.direct_return_action('李洲全-13888888811', normal=True, name='测试商品8号', num=1)
+        salesreturn_num = salesreutrn.get_sales_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num10', salesreturn_num)
+        self.assertTrue(salesreutrn.check_sales_return_success_status())
+
+    # 直接退货
+    def test_105_direct_sales_return_case(self):
+        """直接退货（现金）"""
+        self.login_action()
+        salesreutrn = SalesReturnView(self.driver)
+        salesreutrn.direct_return_action('李洲全-13888888811', name='测试商品8号', num=1, account='现金')
+        salesreturn_num = salesreutrn.get_sales_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num11', salesreturn_num)
+        self.assertTrue(salesreutrn.check_sales_return_success_status())
+
+    # 直接退货
+    def test_106_direct_sales_return_case(self):
+        """直接退货（银行卡）"""
+        self.login_action()
+        salesreutrn = SalesReturnView(self.driver)
+        salesreutrn.direct_return_action('李洲全-13888888811', name='测试商品8号', num=1, account='银行卡')
+        salesreturn_num = salesreutrn.get_sales_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num12', salesreturn_num)
+        self.assertTrue(salesreutrn.check_sales_return_success_status())
+
+    # 直接退货
+    def test_107_direct_sales_return_case(self):
+        """直接退货（支付宝账户）"""
+        self.login_action()
+        salesreutrn = SalesReturnView(self.driver)
+        salesreutrn.direct_return_action('李洲全-13888888811', name='测试商品8号', num=1, account='支付宝账户')
+        salesreturn_num = salesreutrn.get_sales_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num13', salesreturn_num)
+        self.assertTrue(salesreutrn.check_sales_return_success_status())
+
+    # 直接退货
+    def test_108_direct_sales_return_case(self):
+        """直接退货（微信支付账户）"""
+        self.login_action()
+        salesreutrn = SalesReturnView(self.driver)
+        salesreutrn.direct_return_action('李洲全-13888888811', name='测试商品8号', num=1, account='微信支付账户')
+        salesreturn_num = salesreutrn.get_sales_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num14', salesreturn_num)
+        self.assertTrue(salesreutrn.check_sales_return_success_status())
+
+    # 直接退货
+    def test_109_direct_sales_return_case(self):
+        """直接退货（其他账户）"""
+        self.login_action()
+        salesreutrn = SalesReturnView(self.driver)
+        salesreutrn.direct_return_action('李洲全-13888888811', name='测试商品8号', num=1, account='其他账户')
+        salesreturn_num = salesreutrn.get_sales_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num15', salesreturn_num)
+        self.assertTrue(salesreutrn.check_sales_return_success_status())
+
+    # 直接退货
+    def test_110_direct_sales_return_case(self):
+        """直接退货（继续退货）"""
+        self.login_action()
+        salesreutrn = SalesReturnView(self.driver)
+        salesreutrn.direct_return_action('李洲全-13888888811', normal=True, name='测试商品8号', num=1, is_continue=True)
+        salesreturn_num = salesreutrn.get_sales_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num16', salesreturn_num)
+        self.assertTrue(salesreutrn.check_sales_return_success_status())
+
+    # 直接退货
+    def test_111_direct_sales_return_case(self):
+        """直接退货（改价）"""
+        self.login_action()
+        salesreutrn = SalesReturnView(self.driver)
+        salesreutrn.direct_return_action('李洲全-13888888811', name='测试商品8号', num=1, modify=1000)
+        salesreturn_num = salesreutrn.get_detail_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num17', salesreturn_num)
+        total_money = salesreutrn.check_total_money()
+        self.assertEqual(total_money, '￥1000.00')
+
+    # 直接退货
+    def test_112_direct_sales_return_case(self):
+        """直接退货（备注）"""
+        self.login_action()
+        salesreutrn = SalesReturnView(self.driver)
+        salesreutrn.direct_return_action('李洲全-13888888811', name='测试商品8号', num=1, remark='直接退货备注')
+        salesreturn_num = salesreutrn.get_detail_return_ordernum()
+        ReadData().write_data('product_sale_return_order', 'num18', salesreturn_num)
+        info = salesreutrn.check_remaks()
+        self.assertEqual(info, '直接退货备注')

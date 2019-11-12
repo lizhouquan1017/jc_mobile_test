@@ -23,7 +23,7 @@ class CashierTest(BaseDriverOne, TestCase_):
         # 销售之前商品库存数
         logging.info('开始收银')
         cashier = CashierView(self.driver)
-        cashier.cashier_goods(num=1)
+        cashier.cashier_goods(num=30)
         time.sleep(1)
         sales_order_num = cashier.get_sales_order_num()
         ReadData().write_data('sale_order', 'num1', sales_order_num)
