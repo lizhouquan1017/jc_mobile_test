@@ -143,9 +143,9 @@ class BaseOperation:
     def swipe_up(self, t):  # 当前向上滑动swipeup
         screen = self.get_screen_size()
         x1 = int(screen[0] * 0.5)
-        y1 = int(screen[1] * 0.65)
+        y1 = int(screen[1] * 0.85)
         x2 = int(screen[0] * 0.5)
-        y2 = int(screen[1] * 0.25)
+        y2 = int(screen[1] * 0.5)
         self.driver.swipe(x1, y1, x2, y2, t)  # 设置时间为500
 
     def swipe_down(self, t):  # 当前向上滑动swipeup

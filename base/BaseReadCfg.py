@@ -5,7 +5,7 @@ from os import path
 
 
 parent_path = path.dirname(path.dirname(__file__))
-final_path = path.join(parent_path, "config\data.ini")
+final_path = path.join(parent_path, "data\product_data\data.ini")
 
 
 class ReadData(object):
@@ -17,7 +17,8 @@ class ReadData(object):
     """data.ini文件写入/修改操作"""
     def write_data(self, section, key, value):
         self.cof.set(section, key, value)
-        self.cof.write(open(final_path, "w"))
+        with open(final_path, "w") as f:
+            self.cof.write(f)
 
     """读取data.ini文件的数据"""
     def get_data(self, section, key):
