@@ -11,19 +11,23 @@ class PurchaseBusiness(BaseOperation):
         super(PurchaseBusiness, self).__init__(driver)
         self.efg = ReadIni(file_name='purchase_page.ini')
 
-    def pruchase_action(self, goodname1=None, goodname2=None, goodnum=None, supplier_name=None, price=None, info=None):
+    def pruchase_action(self, goodname1=None, goodname2=None, goodnum=None, supplier_name=None,
+                        price=None, settlement=None, remark=None):
         """
         goodname: 商品名称
         goodnum: 采购商品数量
         price: 采购商品改价，修改价格
         supplier_name: 供应商名称
+        settlement: 结算账号类型
+        remark: 备注信息
         :return:
         """
         self.enter_purchase_interface()
         self.choose_goods_action(name1=goodname1, name2=goodname2, num=goodnum)
         self.modfiy_price_action(price=price)
         self.choose_supplier(supplier_name=supplier_name)
-        self.edit_remarks(info=info)
+        self.choose_settlement_type(settlement=settlement)
+        self.edit_remarks(remark=remark)
         self.define_storage_action()
 
     # 进入采购界面
@@ -67,6 +71,15 @@ class PurchaseBusiness(BaseOperation):
         self.click_text(supplier_name)
         sleep(3)
 
+    # 选择结算账号
+    def choose_settlement_type(self, settlement=None):
+        if settlement is not None:
+            logging.info('进入选择结算账户界面')
+            self.click(self.efg.read_config('结算账号选择'))
+            logging.info('选择结算账号')
+            self.click_text(settlement)
+            sleep(1)
+
     # 确认入库
     def define_storage_action(self):
         logging.info(r'确认入库')
@@ -94,10 +107,10 @@ class PurchaseBusiness(BaseOperation):
             pass
 
     # 填写备注
-    def edit_remarks(self, info=None):
-        if info is not None:
+    def edit_remarks(self, remark=None):
+        if remark is not None:
             logging.info('添加备注信息')
-            self.type(self.efg.read_config('备注'), info)
+            self.type(self.efg.read_config('备注'), remark)
             sleep(3)
         else:
             pass

@@ -1,7 +1,7 @@
 # coding:utf-8
 
-from PO.business.goods_module import GoodsViews
-from PO.business.login_module import LoginView
+from PO.business.goods_module import GoodsBusiness
+from PO.business.login_module import LoginBusiness
 from base.TestCaase import TestCase_
 from base.BaseReadCfg import ReadData
 from base.BaseDriver_one import BaseDriverOne
@@ -11,7 +11,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
 
     # 登录操作
     def login_action(self):
-        login = LoginView(self.driver)
+        login = LoginBusiness(self.driver)
         data = login.get_csv_data('../data/product_data/login_data.csv', 1)
         login.login_action(data[0], data[2])
 
