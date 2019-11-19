@@ -1,9 +1,8 @@
 # -*- coding:utf-8 -*-
 __author__ = "lizhouquan"
 
-from base.BaseCheckPort import check_port
-from base.BaseCheckPort import release_port
-from base.BaseAppiumServer import appium_start
+from base.BaseCheckPort import Port
+from base.BaseAppiumServer import Server
 from base.desired_caps import appium_desired
 from base.BaseAdb import AndroidDebugBridge
 import multiprocessing

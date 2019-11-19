@@ -1,24 +1,43 @@
+# coding = utf-8
+
 import subprocess
-from time import ctime
+import time
+import os
 from base.BaseAdb import AndroidDebugBridge
+from base.BaseCheckPort import Port
+from base.BaseReadYaml import ReadYaml
 
 
-def appium_start(host, port, devices):
+class Server(object):
 
-    bootstrap_prot = str(port+1)
+    def creat_command_list(self, devices_list):
+        p = Port()
+        command_list = []
+        appium_port_list = p.creat_port_list(4700, devices_list)
+        bootstrap_prot_list = p.creat_port_list(4900, devices_list)
+        for i in range(len(devices_list)):
+            cmd = 'start /b appium -a ' + '127.0.0.1' + ' -p ' + str(appium_port_list[i]) + ' -bp ' + \
+                  str(bootstrap_prot_list[i]) + ' -U ' + str(devices_list[i])
+            command_list.append(cmd)
+            device =devices_list[i]
+            bp = bootstrap_prot_list[i]
+            port= appium_port_list[i]
+            ReadYaml().write_data(i, device, bp, port)
+        return command_list
 
-    cmd = 'start /b appium -a ' + host + ' -p ' + str(port) + ' -bp ' + str(bootstrap_prot) + ' -U ' + str(devices)
+    def start_server(self, devices_list):
+        cmd = self.creat_command_list(devices_list)
+        for i in range(len(cmd)):
+            subprocess.Popen(cmd[i], shell=True, stdout=open('../appium_log/'+str(i)+'.log', 'a'), stderr=subprocess.STDOUT)
 
-    print('%s at %s' % (cmd, ctime()))
-
-    subprocess.Popen(cmd, shell=True, stdout=open('../appium_log/'+str(port)+'.log', 'a'), stderr=subprocess.STDOUT)
+    def kill_server(self):
+        server_list = os.popen('tasklist | find "node.exe" ').readlines()
+        if len(server_list) > 0:
+            os.system('taskkill -F -PID node.exe')
 
 
 if __name__ == '__main__':
 
     devices = AndroidDebugBridge().attached_devices()
-    host = '127.0.0.1'
-    port = 4723
-    for i in range(len(devices)):
-        port = 4728 + 2*i
-        appium_start(host, port, devices[0])
+    s = Server()
+    s.creat_command_list(devices)

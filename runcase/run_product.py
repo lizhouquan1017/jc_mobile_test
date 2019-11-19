@@ -5,14 +5,14 @@ from os import path
 from tomorrow import threads
 
 parent_path = path.dirname(path.dirname(__file__))
-casepath = path.join(parent_path, "debug_case")
+casepath = path.join(parent_path, "production_environment_case")
 reportpath = path.join(parent_path, "reports")
 
 print(parent_path)
 print(casepath)
 
 
-def add_case(case_path=casepath, rule="test_05_purchaseorder_module.py"):
+def add_case(case_path=casepath, rule="test_product_case.py"):
 
     discover = unittest.defaultTestLoader.discover(case_path, pattern=rule, top_level_dir=None)
     return discover

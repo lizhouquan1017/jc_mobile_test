@@ -22,7 +22,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
         商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
         """
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.type_must_field('测试商品1号', 100, 200, '均色', '均码')
         goods.confirm_add_goods()
@@ -41,7 +41,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
         商品货号，库存数，商品条码，商品备注，其他参数： 非必填
         """
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.type_must_field('测试商品2号', 100, 200, '均色', '均码', 19891017)
         goods.confirm_add_goods()
@@ -60,7 +60,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
         商品货号，库存数，商品条码，商品备注，其他参数： 非必填
         """
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.type_must_field('测试商品3号', 100, 200, '均色', '均码', 19891018, 10)
         goods.confirm_add_goods()
@@ -79,7 +79,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
         商品货号，库存数，商品条码，商品备注，其他参数： 非必填
         """
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.type_must_field('测试商品4号', 50, '90.4', '均色', '均码', 19891019, 30, '20190916-01')
         goods.confirm_add_goods()
@@ -98,7 +98,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
         商品货号，库存数，商品条码，商品备注，其他参数： 非必填
         """
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.type_must_field('测试商品5号', 100, 200, '均色', '均码', 19891020, 30, '20190917-01', '测试商品备注')
         goods.confirm_add_goods()
@@ -136,7 +136,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
     def test_07_obtained_case(self):
         """商品下架功能"""
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.goods_obtained_action()
         status = goods.check_obtained_status()
@@ -146,7 +146,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
     def test_08_shelf_case(self):
         """商品上架"""
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.goods_shelf_action()
         self.assertTrue(goods.check_shelf_status())
@@ -155,7 +155,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
     def test_09_delete_case(self):
         """删除商品"""
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.goods_delete_action()
         self.assertTrue(goods.check_goods_is_not_exist())
@@ -164,7 +164,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
     def test_10_edit_case(self):
         """列表编辑商品"""
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.list_edit_action('测试商品8号')
         self.assertEqual('测试商品8号', goods.get_goods_names())
@@ -173,7 +173,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
     def test_11_edit_case(self):
         """详情编辑商品"""
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.details_edit_action('测试商品9号')
         self.assertEqual('测试商品9号', goods.get_goods_names())
@@ -242,7 +242,7 @@ class GoodsTest(BaseDriverOne, TestCase_):
     def test_18_custom_classification(self):
         """新增自定义类目"""
         self.login_action()
-        goods = GoodsViews(self.driver)
+        goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
         goods.add_custom_classification('自定义分组2')
         self.assertTrue(goods.check_classification_is_exist('自定义分组2'))

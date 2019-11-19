@@ -3,10 +3,10 @@ __author__ = "lizhouquan"
 
 import unittest
 from base.BaseDevicesStart import appium_start_sync
-from base.BaseDevicesStart import appium_desired
+from base.desired_caps import BaseDriver
 from base.BaseAdb import AndroidDebugBridge
 from base.BaseDevicesStart import start_devices
-import multiprocessing
+from base.BaseAppiumServer import Server
 import time
 
 
@@ -17,9 +17,11 @@ devices = devices_list[0]
 class BaseDriverOne(unittest.TestCase):
         @classmethod
         def setUpClass(cls):
-            appium_start_sync()
-            # cls.driver = devices_start_sync()
-            cls.driver = start_devices(devices_list[0], 4723)
+            s = Server()
+            s.start_server(devices)
+            d = BaseDriver()
+            d.appium_desired(0)
+            cls.driver =
 
         def setUp(self):
             self.driver.launch_app()

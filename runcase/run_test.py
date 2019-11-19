@@ -16,7 +16,7 @@ release_port(4723)
 release_port(4725)
 report_dir = r'D:\python_workspace\jc_moblie_test\reports'
 test_dir = '../production_environment_case'
-discover = unittest.defaultTestLoader.discover(test_dir, pattern='test*.py')
+discover = unittest.defaultTestLoader.discover(test_dir, pattern='demo*.py')
 
 
 now = time.strftime('%Y-%m-%d %H_%M_%S')

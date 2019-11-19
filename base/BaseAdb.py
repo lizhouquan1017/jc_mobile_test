@@ -71,10 +71,10 @@ class AndroidDebugBridge(object):
         return result[4]
 
 
-# if __name__ == '__main__':
-#     result1 = AndroidDebugBridge().attached_devices()
-#     # result2 = AndroidDebugBridge().get_app_pid('com.gengcon.android.jxc')
-#     print(result1)
+if __name__ == '__main__':
+    result1 = AndroidDebugBridge().attached_devices()
+    # result2 = AndroidDebugBridge().get_app_pid('com.gengcon.android.jxc')
+    print(result1)
 
 
 
