@@ -71,5 +71,5 @@ if __name__ == '__main__':
     p = Port()
     # post_list = p.creat_port_list(4723, devices_list)
     # print(post_list)
-    p.release_port(4700)
-    p.release_port(4702)
+    p.release_port(4708)
+    p.release_port(4710)

@@ -142,6 +142,7 @@ class BaseOperation:
 
     def swipe_up(self, t):  # 当前向上滑动swipeup
         screen = self.get_screen_size()
+        print(screen)
         x1 = int(screen[0] * 0.5)
         y1 = int(screen[1] * 0.85)
         x2 = int(screen[0] * 0.5)

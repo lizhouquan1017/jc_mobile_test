@@ -368,6 +368,7 @@ class GoodsBusiness(BaseOperation):
     def add_custom_classification(self, name):
         logging.info('点击新增商品')
         self.click(self.efg.read_config('新增按钮'))
+        sleep(1)
         logging.info('滑动到自定义分类界面')
         self.swipe_up(500)
         # self.swipe(self.新增商品界面, 'up', 0, -0.8)
@@ -379,6 +380,7 @@ class GoodsBusiness(BaseOperation):
         self.type(self.efg.read_config('自定义分类名称'), name)
         logging.info('点击确认')
         self.click(self.efg.read_config('确认选择'))
+        sleep(2)
 
     # # 编辑自定义分类
     # def edit_custom_classification(self, name):

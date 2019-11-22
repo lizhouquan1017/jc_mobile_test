@@ -19,9 +19,9 @@ class Server(object):
             cmd = 'start /b appium -a ' + '127.0.0.1' + ' -p ' + str(appium_port_list[i]) + ' -bp ' + \
                   str(bootstrap_prot_list[i]) + ' -U ' + str(devices_list[i])
             command_list.append(cmd)
-            device =devices_list[i]
+            device = devices_list[i]
             bp = bootstrap_prot_list[i]
-            port= appium_port_list[i]
+            port = appium_port_list[i]
             ReadYaml().write_data(i, device, bp, port)
         return command_list
 
@@ -40,4 +40,4 @@ if __name__ == '__main__':
 
     devices = AndroidDebugBridge().attached_devices()
     s = Server()
-    s.creat_command_list(devices)
+    s.kill_server()

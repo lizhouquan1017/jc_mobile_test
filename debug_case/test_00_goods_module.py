@@ -2,12 +2,19 @@
 
 from PO.business.goods_module import GoodsBusiness
 from PO.business.login_module import LoginBusiness
-from base.TestCaase import TestCase_
-from base.BaseReadCfg import ReadData
-from base.BaseDriver_one import BaseDriverOne
+from base.ParametrizedCase import ParametrizedCase
+from base.desired_caps import BaseDriver
 
 
-class GoodsTest(BaseDriverOne, TestCase_):
+
+class GoodsTest(ParametrizedCase):
+
+    def setUp(self):
+        driver = BaseDriver()
+        self.driver = driver.appium_desired(self.param)
+
+    def tearDown(self):
+        self.driver.quit()
 
     # 登录操作
     def login_action(self):
@@ -15,100 +22,100 @@ class GoodsTest(BaseDriverOne, TestCase_):
         data = login.get_csv_data('../data/product_data/login_data.csv', 1)
         login.login_action(data[0], data[2])
 
-    # 正常添加商品
-    def test_01_add_case(self):
-        """正常添加商品"""
-        """
-        商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
-        """
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.type_must_field('测试商品1号', 100, 200, '均色', '均码')
-        goods.confirm_add_goods()
-        status = goods.check_success_status()
-        goods.get_goods_details()
-        goods_num = goods.get_goods_num()
-        sku_num = goods.get_sku_barcode()
-        ReadData().write_data('product_goods_bar_code', 'num', goods_num)
-        ReadData().write_data('product_goods_single_barcode', 'num', sku_num)
-        self.assertEqual('添加新品成功', status)
-
-    def test_02_add_case(self):
-        """自定义商品货号添加商品"""
-        """
-        商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
-        商品货号，库存数，商品条码，商品备注，其他参数： 非必填
-        """
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.type_must_field('测试商品2号', 100, 200, '均色', '均码', 19891017)
-        goods.confirm_add_goods()
-        status = goods.check_success_status()
-        goods.get_goods_details()
-        goods_num = goods.get_goods_num()
-        sku_code = goods.get_sku_barcode()
-        ReadData().write_data('product_goods_bar_code', 'num', goods_num)
-        ReadData().write_data('product_goods_single_barcode', 'num', sku_code)
-        self.assertEqual('添加新品成功', status)
-
-    def test_03_add_case(self):
-        """自定义商品货号添加商品,添加初始库存"""
-        """
-        商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
-        商品货号，库存数，商品条码，商品备注，其他参数： 非必填
-        """
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.type_must_field('测试商品3号', 100, 200, '均色', '均码', 19891018, 10)
-        goods.confirm_add_goods()
-        status = goods.check_success_status()
-        goods.get_goods_details()
-        goods_code = goods.get_goods_num()
-        sku_code = goods.get_sku_barcode()
-        ReadData().write_data('product_goods_bar_code', 'num', goods_code)
-        ReadData().write_data('product_goods_single_barcode', 'num', sku_code)
-        self.assertEqual('添加新品成功', status)
-
-    def test_04_add_case(self):
-        """自定义商品货号添加商品,添加初始库存，添加商品条码"""
-        """
-        商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
-        商品货号，库存数，商品条码，商品备注，其他参数： 非必填
-        """
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.type_must_field('测试商品4号', 50, '90.4', '均色', '均码', 19891019, 30, '20190916-01')
-        goods.confirm_add_goods()
-        status = goods.check_success_status()
-        goods.get_goods_details()
-        goods_num = goods.get_goods_num()
-        sku_code = goods.get_sku_barcode()
-        ReadData().write_data('product_goods_bar_code', 'num', goods_num)
-        ReadData().write_data('product_goods_single_barcode', 'num', sku_code)
-        self.assertEqual('添加新品成功', status)
-
-    def test_05_add_case(self):
-        """自定义商品货号添加商品,添加初始库存，添加商品条码,添加备注"""
-        """
-        商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
-        商品货号，库存数，商品条码，商品备注，其他参数： 非必填
-        """
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.type_must_field('测试商品5号', 100, 200, '均色', '均码', 19891020, 30, '20190917-01', '测试商品备注')
-        goods.confirm_add_goods()
-        status = goods.check_success_status()
-        goods.get_goods_details()
-        goods_num = goods.get_goods_num()
-        sku_code = goods.get_sku_barcode()
-        ReadData().write_data('product_goods_bar_code', 'num', goods_num)
-        ReadData().write_data('product_goods_single_barcode', 'num', sku_code)
-        self.assertEqual('添加新品成功', status)
+    # # 正常添加商品
+    # def test_01_add_case(self):
+    #     """正常添加商品"""
+    #     """
+    #     商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
+    #     """
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.type_must_field('测试商品1号', 100, 200, '均色', '均码')
+    #     goods.confirm_add_goods()
+    #     status = goods.check_success_status()
+    #     goods.get_goods_details()
+    #     goods_num = goods.get_goods_num()
+    #     sku_num = goods.get_sku_barcode()
+    #     ReadData().write_data('product_goods_bar_code', 'num', goods_num)
+    #     ReadData().write_data('product_goods_single_barcode', 'num', sku_num)
+    #     self.assertEqual('添加新品成功', status)
+    #
+    # def test_02_add_case(self):
+    #     """自定义商品货号添加商品"""
+    #     """
+    #     商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
+    #     商品货号，库存数，商品条码，商品备注，其他参数： 非必填
+    #     """
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.type_must_field('测试商品2号', 100, 200, '均色', '均码', 19891017)
+    #     goods.confirm_add_goods()
+    #     status = goods.check_success_status()
+    #     goods.get_goods_details()
+    #     goods_num = goods.get_goods_num()
+    #     sku_code = goods.get_sku_barcode()
+    #     ReadData().write_data('product_goods_bar_code', 'num', goods_num)
+    #     ReadData().write_data('product_goods_single_barcode', 'num', sku_code)
+    #     self.assertEqual('添加新品成功', status)
+    #
+    # def test_03_add_case(self):
+    #     """自定义商品货号添加商品,添加初始库存"""
+    #     """
+    #     商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
+    #     商品货号，库存数，商品条码，商品备注，其他参数： 非必填
+    #     """
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.type_must_field('测试商品3号', 100, 200, '均色', '均码', 19891018, 10)
+    #     goods.confirm_add_goods()
+    #     status = goods.check_success_status()
+    #     goods.get_goods_details()
+    #     goods_code = goods.get_goods_num()
+    #     sku_code = goods.get_sku_barcode()
+    #     ReadData().write_data('product_goods_bar_code', 'num', goods_code)
+    #     ReadData().write_data('product_goods_single_barcode', 'num', sku_code)
+    #     self.assertEqual('添加新品成功', status)
+    #
+    # def test_04_add_case(self):
+    #     """自定义商品货号添加商品,添加初始库存，添加商品条码"""
+    #     """
+    #     商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
+    #     商品货号，库存数，商品条码，商品备注，其他参数： 非必填
+    #     """
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.type_must_field('测试商品4号', 50, '90.4', '均色', '均码', 19891019, 30, '20190916-01')
+    #     goods.confirm_add_goods()
+    #     status = goods.check_success_status()
+    #     goods.get_goods_details()
+    #     goods_num = goods.get_goods_num()
+    #     sku_code = goods.get_sku_barcode()
+    #     ReadData().write_data('product_goods_bar_code', 'num', goods_num)
+    #     ReadData().write_data('product_goods_single_barcode', 'num', sku_code)
+    #     self.assertEqual('添加新品成功', status)
+    #
+    # def test_05_add_case(self):
+    #     """自定义商品货号添加商品,添加初始库存，添加商品条码,添加备注"""
+    #     """
+    #     商品名称，成本价，零售价，颜色属性，尺码属性 ：必填
+    #     商品货号，库存数，商品条码，商品备注，其他参数： 非必填
+    #     """
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.type_must_field('测试商品5号', 100, 200, '均色', '均码', 19891020, 30, '20190917-01', '测试商品备注')
+    #     goods.confirm_add_goods()
+    #     status = goods.check_success_status()
+    #     goods.get_goods_details()
+    #     goods_num = goods.get_goods_num()
+    #     sku_code = goods.get_sku_barcode()
+    #     ReadData().write_data('product_goods_bar_code', 'num', goods_num)
+    #     ReadData().write_data('product_goods_single_barcode', 'num', sku_code)
+    #     self.assertEqual('添加新品成功', status)
 
     # def test_06_add_case(self):
     #     """自定义商品货号添加商品,添加初始库存，添加商品条码,添加备注，添加其他参数"""
@@ -132,51 +139,51 @@ class GoodsTest(BaseDriverOne, TestCase_):
     #     ReadData().write_data('goods_single_barcode', 'num', sku_code)
     #     self.assertEqual('添加新品成功', status)
 
-    # 商品下架
-    def test_07_obtained_case(self):
-        """商品下架功能"""
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.goods_obtained_action()
-        status = goods.check_obtained_status()
-        self.assertEqual('该商品已下架', status)
-
-    # 商品上架
-    def test_08_shelf_case(self):
-        """商品上架"""
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.goods_shelf_action()
-        self.assertTrue(goods.check_shelf_status())
-
-    # 商品删除操作
-    def test_09_delete_case(self):
-        """删除商品"""
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.goods_delete_action()
-        self.assertTrue(goods.check_goods_is_not_exist())
-
-    # 列表编辑
-    def test_10_edit_case(self):
-        """列表编辑商品"""
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.list_edit_action('测试商品8号')
-        self.assertEqual('测试商品8号', goods.get_goods_names())
-
-    # 列表编辑
-    def test_11_edit_case(self):
-        """详情编辑商品"""
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.details_edit_action('测试商品9号')
-        self.assertEqual('测试商品9号', goods.get_goods_names())
+    # # 商品下架
+    # def test_07_obtained_case(self):
+    #     """商品下架功能"""
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.goods_obtained_action()
+    #     status = goods.check_obtained_status()
+    #     self.assertEqual('该商品已下架', status)
+    #
+    # # 商品上架
+    # def test_08_shelf_case(self):
+    #     """商品上架"""
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.goods_shelf_action()
+    #     self.assertTrue(goods.check_shelf_status())
+    #
+    # # 商品删除操作
+    # def test_09_delete_case(self):
+    #     """删除商品"""
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.goods_delete_action()
+    #     self.assertTrue(goods.check_goods_is_not_exist())
+    #
+    # # 列表编辑
+    # def test_10_edit_case(self):
+    #     """列表编辑商品"""
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.list_edit_action('测试商品8号')
+    #     self.assertEqual('测试商品8号', goods.get_goods_names())
+    #
+    # # 列表编辑
+    # def test_11_edit_case(self):
+    #     """详情编辑商品"""
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.details_edit_action('测试商品9号')
+    #     self.assertEqual('测试商品9号', goods.get_goods_names())
 
     # # 新增颜色规则组
     # def test_12_add_color_group(self):
@@ -244,8 +251,8 @@ class GoodsTest(BaseDriverOne, TestCase_):
         self.login_action()
         goods = GoodsBusiness(self.driver)
         goods.enter_goods_list()
-        goods.add_custom_classification('自定义分组2')
-        self.assertTrue(goods.check_classification_is_exist('自定义分组2'))
+        goods.add_custom_classification('自定义分组1')
+        self.assertTrue(goods.check_classification_is_exist('自定义分组1'))
     #
     # # 编辑自定义类目
     # def test_19_custom_classification(self):
