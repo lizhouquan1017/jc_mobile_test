@@ -40,4 +40,5 @@ if __name__ == '__main__':
 
     devices = AndroidDebugBridge().attached_devices()
     s = Server()
-    s.kill_server()
+    # s.kill_server()
+    s.start_server(devices)

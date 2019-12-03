@@ -28,7 +28,7 @@ class BaseDriver:
                 # desired_caps['udid'] = udid
                 desired_caps['appPackage'] = "com.gengcon.android.jxc"
                 desired_caps['appActivity'] = "com.gengcon.android.jxc.login.SplashActivity"
-                desired_caps['noReset'] = "False"
+                desired_caps['noReset'] = "True"
                 # desired_caps['unicodeKeyboard'] = data['unicodeKeyboard']
                 # desired_caps['resetKeyboard'] = data['resetKeyboard']
                 desired_caps['automationName'] = "uiautomator2"
@@ -37,22 +37,7 @@ class BaseDriver:
             return driver
 
 
-# with open('../config/devices.yaml', 'r', encoding='utf-8') as file:
-#     data = yaml.load(file)
-#     desired_caps = {}
-#     desired_caps['platformName'] = data['platformName']
-#     desired_caps['platformVersion'] = data['platformVersion']
-#     # desired_caps['deviceName'] = data['deviceName']
-#     desired_caps['deviceName'] = udid
-#     desired_caps['app'] = PATH('../app/jxc.apk')
-#     desired_caps['udid'] = udid
-#     desired_caps['appPackage'] = data['appPackage']
-#     desired_caps['appActivity'] = data['appActivity']
-#     desired_caps['noReset'] = data['noReset']
-#     desired_caps['unicodeKeyboard'] = data['unicodeKeyboard']
-#     desired_caps['resetKeyboard'] = data['resetKeyboard']
-#     desired_caps['automationName'] = data['automationName']
-#     desired_caps['systemPort'] = port+8000
-#     print('appium port:%s start run %s at %s' % (port, udid, ctime()))
-#     driver = webdriver.Remote('http://' + str(data['ip']) + ':' + str(port) + '/wd/hub', desired_caps)
-# return driver
+if __name__ == '__main__':
+    b = BaseDriver()
+    driver = b.appium_desired(0)
+    driver.find_element_by_id('com.gengcon.android.jxc:id/phone_num_edit_text').send_keys('15927169432')

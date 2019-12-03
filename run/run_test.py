@@ -7,7 +7,9 @@ import unittest
 from base.BaseAdb import AndroidDebugBridge
 from base.ParametrizedCase import ParametrizedCase
 from debug_case.test_debug_case import DebugTest
-from base import HTMLTestRunnerSimple
+from production_environment_case.test_product_case import ProdcutEnviromentTest
+# from base import HTMLTestRunnerSimple
+from base.HTMLTestRunner_cn import HTMLTestRunner
 from base.BaseReadYaml import ReadYaml
 from base.BaseAppiumServer import Server
 from time import sleep
@@ -29,8 +31,10 @@ def get_suite_for_report(i):
         descip = '设备ID：' + deviceslist[i]
         html_file = base_path + '/reports/report_No' + str(i + 1) + '_' + deviceslist[i] + '.html'
         with open(html_file, 'wb') as fp:
-            run = HTMLTestRunnerSimple.HTMLTestRunner(stream=fp, title=report_title, verbosity=2, description=descip,
-                                                      retry=None, save_last_try=True)
+            # run = HTMLTestRunnerSimple.HTMLTestRunner(stream=fp, title=report_title, verbosity=2, description=descip,
+            #                                           retry=None, save_last_try=True)
+            run = HTMLTestRunner(title="带截图的测试报告", description="小试牛刀", stream=fp,
+                                 verbosity=2, retry=0, save_last_try=False)
             run.run(suite)
         # if i == len(deviceslist)-1:
         #     Server().kill_server()

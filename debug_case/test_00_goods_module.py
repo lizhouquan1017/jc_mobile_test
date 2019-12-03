@@ -6,7 +6,6 @@ from base.ParametrizedCase import ParametrizedCase
 from base.desired_caps import BaseDriver
 
 
-
 class GoodsTest(ParametrizedCase):
 
     def setUp(self):
@@ -17,10 +16,15 @@ class GoodsTest(ParametrizedCase):
         self.driver.quit()
 
     # 登录操作
-    def login_action(self):
-        login = LoginBusiness(self.driver)
-        data = login.get_csv_data('../data/product_data/login_data.csv', 1)
-        login.login_action(data[0], data[2])
+    def test_login_action(self):
+        if self.param == 0:
+            login = LoginBusiness(self.driver)
+            data = login.get_csv_data('../data/product_data/login_data.csv', 1)
+            login.login_action(data[0], data[2])
+        else:
+            login = LoginBusiness(self.driver)
+            data = login.get_csv_data('../data/test_data/login_data.csv', 1)
+            login.login_action(data[0], data[2])
 
     # # 正常添加商品
     # def test_01_add_case(self):
@@ -246,13 +250,13 @@ class GoodsTest(ParametrizedCase):
     #     self.assertNotEqual('新增尺码规则组2', size_group_name)
 
     # 新增自定义类目
-    def test_18_custom_classification(self):
-        """新增自定义类目"""
-        self.login_action()
-        goods = GoodsBusiness(self.driver)
-        goods.enter_goods_list()
-        goods.add_custom_classification('自定义分组1')
-        self.assertTrue(goods.check_classification_is_exist('自定义分组1'))
+    # def test_18_custom_classification(self):
+    #     """新增自定义类目"""
+    #     self.login_action()
+    #     goods = GoodsBusiness(self.driver)
+    #     goods.enter_goods_list()
+    #     goods.add_custom_classification('自定义分组1')
+    #     self.assertTrue(goods.check_classification_is_exist('自定义分组1'))
     #
     # # 编辑自定义类目
     # def test_19_custom_classification(self):

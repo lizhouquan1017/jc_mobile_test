@@ -23,6 +23,7 @@ class BaseOperation:
         try:
             e = WebDriverWait(self.driver, 10, 1, NoSuchElementException).until(
                 lambda driver: driver.find_element_by_id(*loc))
+            # e = self.driver.find_element_by_id(*loc)
             return e
         except NoSuchElementException:
             logging.info('元素不存在')

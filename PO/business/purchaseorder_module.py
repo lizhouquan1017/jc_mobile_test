@@ -150,9 +150,23 @@ class PurchaseOrderBusiness(BaseOperation):
         return return_dict
 
     # 采购单详情采购单单号
-    def get_detail_ptuchase_order(self):
+    def get_detail_purchase_order(self):
         order_num = self.get_text(self.efg.read_config('采购单详情中采购单号'))
         return order_num
+
+    # 采购单详情结算方式
+    def get_detail_purchase_settlementtype(self):
+        settlementtyp = self.get_text(self.efg.read_config('结算方式'))
+        return settlementtyp
+
+    # 采购单详情备注信息
+    def get_detail_purchase_remark(self):
+        remark = self.get_text(self.efg.read_config('详情备注'))
+        return remark
+
+    def get_detail_purchase_supplier(self):
+        supplier = self.get_text(self.efg.read_config('详情供应商'))
+        return supplier
 
     # 检查作废是否成功
     def check_obsolete_status(self):
